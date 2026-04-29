@@ -1,5 +1,6 @@
-FROM php:8.2-fpm-alpine
-WORKDIR /app
+FROM php:8.2-apache
+RUN a2enmod rewrite
 RUN docker-php-ext-install mysqli
-COPY . .
-EXPOSE 9000
+COPY . /var/www/html/
+EXPOSE 80
+CMD ["apache2-foreground"]
