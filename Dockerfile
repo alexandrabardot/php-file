@@ -1,12 +1,5 @@
-FROM php:8.2-apache
-
-# Fix Apache MPM conflict
-RUN a2dismod mpm_event && a2enmod mpm_prefork
-
-# Enable MySQL support
+FROM php:8.2-fpm-alpine
+WORKDIR /app
 RUN docker-php-ext-install mysqli
-
-# Copy your files
-COPY . /var/www/html/
-
-EXPOSE 80
+COPY . .
+EXPOSE 9000
